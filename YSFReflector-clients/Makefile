@@ -1,29 +1,30 @@
 #
-# Copyright 2019-2020 Michael BD7MQB <bd7mqb@qq.com>
-# This is free software, licensed under the GNU GENERAL PUBLIC LICENSE, Version 2.0
+# Copyright (C) 2008-2011 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
 #
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=YSFReflector
-PKG_REV:=4eadb0b
+#PKG_REV:=HEAD
+PKG_REV:=f2cc04a
+PKG_VERSION:=BIPPCS-2024
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/qzyuebing/YSFReflector
-PKG_MIRROR_HASH:=f0a7d69433b656477050b29debfb8b8a97a4fde4f069c3b37fa8bac7f0c919da
+PKG_SOURCE_URL:=https://github.com/g4klx/MMDVM_CM
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
 PKG_SOURCE_PROTO:=git
-PKG_LICENSE:=GPL-2.0
-PKG_MAINTAINER:=Michael BD7MQB <bd7mqb@qq.com>
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/${PKG_NAME}
 	SECTION:=net
 	CATEGORY:=MMDVM
-	TITLE:=MMDVM YSFReflector
+	TITLE:=MMDVM YSFClients
 	URL:=$(PKG_SOURCE_URL)
 	DEPENDS:=+libpthread +libstdcpp
 endef
@@ -51,15 +52,7 @@ define Package/${PKG_NAME}/conffiles
 /etc/YSFReflector.ini
 endef
 
-# define Package/${PKG_NAME}/postinst
-# #!/bin/sh
-# [ ! -f /etc/config/mmdvm ] && touch /etc/config/mmdvm
-# [ -z `uci -q get mmdvm.System_Fusion.Enable` ] && {
-# 	uci set mmdvm.System_Fusion=mmdvmhost
-# 	uci set mmdvm.System_Fusion.Enable=1
-# 	uci commit mmdvm
-# }
-# exit 0
-# endef
+define Package/${PKG_NAME}/postinst
+endef
 
 $(eval $(call BuildPackage,${PKG_NAME}))
