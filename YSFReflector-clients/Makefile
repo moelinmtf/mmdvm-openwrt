@@ -11,7 +11,7 @@ PKG_VERSION:=1.2.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/qzyuebing/YSFClients
+PKG_SOURCE_URL:=https://github.com/qzyuebing/YSFClients/tree/master/YSFReflector
 PKG_MIRROR_HASH:=f0a7d69433b656477050b29debfb8b8a97a4fde4f069c3b37fa8bac7f0c919df
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
