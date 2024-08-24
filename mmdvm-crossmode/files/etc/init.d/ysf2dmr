@@ -1,50 +1,39 @@
 #!/bin/sh /etc/rc.common
-# Copyright (C) 2017,2018 BG5HHP
+# 
+# Copyright 2019-2020 Michael BD7MQB <bd7mqb@qq.com>
+# This is free software, licensed under the GNU GENERAL PUBLIC LICENSE, Version 2.0
+# 
 
-START=99
-SERVICE_USE_PID=0
+START=91
+APP=YSF2DMR
+USE_PROCD=1
+LOG_PATH=/var/log/mmdvm
+EXTRA_COMMANDS="status"                                                                                        
+EXTRA_HELP="	status	Display status of ${APP}" 
 
-PKG_NAME=YSF2DMR
-BIN_FILE=/usr/sbin/YSF2DMR
-CONF_FILE=/etc/YSF2DMR.ini
-PID_FILE=/tmp/YSF2DMR.pid
+start_service() {
+    [ -d $LOG_PATH ] || mkdir -m 0775 -p $LOG_PATH
+    ubus -t 60 wait_for network.interface network.wireless 2>/dev/null
 
-do_start() {
-  if [ -e ${CONF_FILE} ]; then
-    echo "Starting..."
-    ${BIN_FILE} ${CONF_FILE}
-    sleep 3
-    local PID=`pidof ${PKG_NAME}`
-    if [ $? -eq 1 ]; then
-        echo "Process does not exist, ${PKG_NAME} will not start."
-        return 1
+    logger -s -t mmdvm "Starting $APP Service..."
+    procd_open_instance
+    procd_set_param respawn
+    procd_set_param command /usr/sbin/$APP
+    procd_close_instance
+}
+ 
+stop_service() {
+    logger -s -t mmdvm "Stoping $APP Service..."
+}
+
+status() {
+    local PID=`pidof ${APP}`
+    local STATUS
+    if [ ! ${PID} ]; then
+        STATUS="Stopped"
+    else
+        STATUS="Started - PID ${PID}"
     fi
-    echo ${PID} >${PID_FILE}
-    >&2 echo "${PKG_NAME} started"
-  else
-    >&2 echo "configuration file is missing, ${PKG_NAME} will not start."
-    return 1
-  fi
-  return 0
-}
 
-start() {
-  do_start
-}
-
-stop() {
-	if [ -e ${PID_FILE} ]; then
-		PID=`cat ${PID_FILE}`
-		kill $PID > /dev/null 2>&1
-		rm -f ${PID_FILE}
-		echo "${PKG_NAME} stopped"
-	else
-		echo "${PKG_NAME} is not running"
-	fi
-    return 0
-}
-
-restart() {
-	stop
-	start
+    echo "${APP}:	[${STATUS}]"
 }
