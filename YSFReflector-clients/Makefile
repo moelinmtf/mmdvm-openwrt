@@ -49,7 +49,7 @@ define Package/${PKG_NAME}/install
 endef
 
 define Package/${PKG_NAME}/conffiles
-/etc/YSFGateway.ini
+/etc/YSFReflector.ini
 endef
 
 # define Package/${PKG_NAME}/postinst
