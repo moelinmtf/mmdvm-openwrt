@@ -24,7 +24,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/${PKG_NAME}
 	SECTION:=net
 	CATEGORY:=MMDVM
-	TITLE:=MMDVM YSFClients
+	TITLE:=MMDVM YSFReflector
 	URL:=$(PKG_SOURCE_URL)
 	DEPENDS:=+libpthread +libstdcpp
 endef
