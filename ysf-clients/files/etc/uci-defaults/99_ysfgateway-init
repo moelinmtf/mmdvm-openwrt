@@ -11,6 +11,7 @@ ENABLE=$(uci -q get mmdvm.System_Fusion.Enable)
 if [ "$ENABLE" != "1" ]; then
     /etc/init.d/ysfgateway stop && /etc/init.d/ysfgateway disable
     /etc/init.d/ysfparrot stop && /etc/init.d/ysfparrot disable
+    /etc/init.d/ysfreflector stop && /etc/init.d/ysfreflector disable
 fi
 
 exit 0
