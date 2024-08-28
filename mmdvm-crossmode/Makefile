@@ -14,7 +14,7 @@ PKG_VERSION:=BI4PCS
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://github.com/g4klx/MMDVM_CM
+PKG_SOURCE_URL:=https://github.com/qzyuebing/MMDVM_CM
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
 PKG_SOURCE_PROTO:=git
@@ -47,6 +47,7 @@ define Package/${PKG_NAME}/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSF2P25/YSF2P25 $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSF2DMR/YSF2DMR $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/DMR2YSF/DMR2YSF $(1)/usr/sbin/
+        $(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFReflector $(1)/usr/sbin/
 	$(CP) -a files/* $(1)/
 endef
 
@@ -54,6 +55,7 @@ define Package/${PKG_NAME}/conffiles
 /etc/YSF2P25.ini
 /etc/YSF2DMR.ini
 /etc/DMR2YSF.ini
+/etc/YSFReflector.ini
 endef
 
 define Package/${PKG_NAME}/postinst
