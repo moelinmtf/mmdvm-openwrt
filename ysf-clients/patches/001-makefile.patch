@@ -3,7 +3,7 @@ index dd401bd..7e4a810 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,4 +1,4 @@
--SUBDIRS = YSFGateway YSFParrot YSFReflector
-+SUBDIRS = YSFGateway YSFParrot
+-SUBDIRS = YSFGateway YSFParrot 
++SUBDIRS = YSFGateway YSFParrot YSFReflector
  CLEANDIRS = $(SUBDIRS:%=clean-%)
  INSTALLDIRS = $(SUBDIRS:%=install-%)

@@ -46,11 +46,13 @@ define Package/${PKG_NAME}/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFGateway/YSFGateway $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFParrot/YSFParrot $(1)/usr/sbin/
+	$(INSTALL_BIR) $(PKG_BUILD_DIR)/YSFReflector/YSFReflector $(1)/usr/sbin
 	$(CP) -a files/* $(1)/
 endef
 
 define Package/${PKG_NAME}/conffiles
 /etc/YSFGateway.ini
+/etc/YSFReflector.ini
 endef
 
 # define Package/${PKG_NAME}/postinst
