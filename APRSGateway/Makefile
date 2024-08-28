@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=APRSGateway
 #PKG_REV:=HEAD
-PKG_REV:=f2cc04s
+#PKG_REV:=f2cc04s
 PKG_VERSION:=BI4PCS
 PKG_RELEASE:=2
 
