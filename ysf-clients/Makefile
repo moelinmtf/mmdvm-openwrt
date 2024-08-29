@@ -35,18 +35,15 @@ endef
 
 TARGET_CFLAGS += -std=c++0x -DOPENWRT=1
 
-TARGET_LDFLAGS += \
-        -Wl,-rpath-link=$(STAGING_DIR)/usr/lib \
+TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
-MAKE_FLAGS +=\
-        CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" \
-        LDFLAGS="$(TARGET_LDFLAGS)" \
+MAKE_FLAGS += CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" LDFLAGS="$(TARGET_LDFLAGS)"
 
 define Package/${PKG_NAME}/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFGateway/YSFGateway $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFParrot/YSFParrot $(1)/usr/sbin/
-	$(INSTALL_BIR) $(PKG_BUILD_DIR)/YSFReflector/YSFReflector $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/YSFReflector/YSFReflector $(1)/usr/sbin/
 	$(CP) -a files/* $(1)/
 endef
 
@@ -54,16 +51,5 @@ define Package/${PKG_NAME}/conffiles
 /etc/YSFGateway.ini
 /etc/YSFReflector.ini
 endef
-
-# define Package/${PKG_NAME}/postinst
-# #!/bin/sh
-# [ ! -f /etc/config/mmdvm ] && touch /etc/config/mmdvm
-# [ -z `uci -q get mmdvm.System_Fusion.Enable` ] && {
-# 	uci set mmdvm.System_Fusion=mmdvmhost
-# 	uci set mmdvm.System_Fusion.Enable=1
-# 	uci commit mmdvm
-# }
-# exit 0
-# endef
 
 $(eval $(call BuildPackage,${PKG_NAME}))
